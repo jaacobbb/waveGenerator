@@ -59,8 +59,10 @@ module hcsr04_sensor (
                     end else begin
                         measuring <= 0;
                         // Convert echo count to distance in mm
-                        // echo_count / 294 = distance in mm
+                        // At 50MHz, 294 cycles = 1mm
+                        // Divide by 2 because we're measuring round trip
                         distance <= echo_count / 294;
+                        $display("Debug: echo_count=%d, calculated distance=%d", echo_count, echo_count / 294);
                         done <= 1;
                         state <= IDLE;
                     end

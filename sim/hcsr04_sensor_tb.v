@@ -31,10 +31,10 @@ module hcsr04_sensor_tb;
     // Function to simulate echo pulse for a given distance
     task simulate_distance;
         input integer distance_mm;
-        reg [31:0] echo_cycles;  // Moved outside the begin block
+        reg [31:0] echo_cycles;
         begin
             // Calculate echo pulse width in clock cycles
-            // 294 cycles per mm at 50MHz
+            // 294 cycles per mm at 50MHz (already accounts for round trip)
             echo_cycles = distance_mm * 294;
             
             // Wait for trigger pulse to complete
@@ -42,7 +42,8 @@ module hcsr04_sensor_tb;
             
             // Generate echo pulse
             #100 echo = 1;
-            #(echo_cycles * 20) echo = 0;  // 20ns per cycle
+            #(echo_cycles) echo = 0;  // Each cycle is already 20ns
+            $display("Debug: Simulating distance %d mm with %d cycles", distance_mm, echo_cycles);
         end
     endtask
 
