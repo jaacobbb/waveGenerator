@@ -13,10 +13,10 @@ module hcsr04_sensor (
     localparam WAIT_ECHO = 2'b10;
     localparam MEASURE = 2'b11;
 
-    reg [1:0] state;
-    reg [9:0] counter;      // For trigger pulse
-    reg [15:0] echo_count;  // For echo pulse width
-    reg measuring;
+    reg [1:0] state = IDLE;  // Initialize state to IDLE
+    reg [9:0] counter = 0;      // Initialize counter
+    reg [15:0] echo_count = 0;  // Initialize echo count
+    reg measuring = 0;          // Initialize measuring flag
 
     // Speed of sound = 340 m/s = 340,000 mm/s
     // Time = Distance * 2 / Speed

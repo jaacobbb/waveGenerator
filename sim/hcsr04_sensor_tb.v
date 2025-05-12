@@ -51,25 +51,40 @@ module hcsr04_sensor_tb;
         
         // Test case 1: 100mm distance
         #100;
+        $display("Starting test case 1: 100mm");
         start = 1;
         #20 start = 0;
+        $display("Waiting for trigger...");
+        wait(trigger == 0);
+        $display("Trigger complete, simulating echo...");
         simulate_distance(100);
+        $display("Waiting for done signal...");
         wait(done);
         $display("Distance measured: %d mm", distance);
         
         // Test case 2: 500mm distance
         #1000;
+        $display("Starting test case 2: 500mm");
         start = 1;
         #20 start = 0;
+        $display("Waiting for trigger...");
+        wait(trigger == 0);
+        $display("Trigger complete, simulating echo...");
         simulate_distance(500);
+        $display("Waiting for done signal...");
         wait(done);
         $display("Distance measured: %d mm", distance);
         
         // Test case 3: 1000mm distance
         #1000;
+        $display("Starting test case 3: 1000mm");
         start = 1;
         #20 start = 0;
+        $display("Waiting for trigger...");
+        wait(trigger == 0);
+        $display("Trigger complete, simulating echo...");
         simulate_distance(1000);
+        $display("Waiting for done signal...");
         wait(done);
         $display("Distance measured: %d mm", distance);
         
